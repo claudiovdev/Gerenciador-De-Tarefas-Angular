@@ -21,6 +21,25 @@ export class TarefaService {
     tarefa.id = new Date().getTime();
     tarefas.push(tarefa);
     localStorage['tarefas'] = JSON.stringify(tarefas);
+  }
 
+
+  /* A função buscarPorId ela lista todos os id e procura se entre eles existe o id solicitado, caso existe ele retorna o id. */
+  buscarPorId(id: number): Tarefa{
+    const tarefas : Tarefa[] = this.listarTodos();
+    return tarefas.find(tarefa => tarefa.id === id);
+  }
+
+
+    /* A função atualizar lista todas as tarefas e procura a terefa informada no parametro.
+    caso a tarefa seja encontrada ele mostra a na posição existente para atualiar os valores e gravo ela no localStorage e tenho a tarefa atualizada. */
+  atualizar(tarefa: Tarefa): void {
+    const tarefas: Tarefa[] = this.listarTodos();
+    tarefas.forEach((obj,index,objs) =>{
+      if(tarefa.id === obj.id){
+        objs[index] = tarefa;
+      }
+    });
+    localStorage['tarefas'] = JSON.stringify(tarefas);
   }
 }
