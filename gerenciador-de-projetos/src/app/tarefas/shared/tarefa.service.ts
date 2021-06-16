@@ -41,5 +41,21 @@ export class TarefaService {
       }
     });
     localStorage['tarefas'] = JSON.stringify(tarefas);
+  };
+
+  /* A função remover lista todas as tarefas, filtra e retorna todas as tarefas diferentes do id informado. */
+  remover(id: number): void{
+    let tarefas: Tarefa[] = this.listarTodos();
+    tarefas = tarefas.filter(tarefa => tarefa.id !== id);
+    localStorage['tarefas'] = JSON.stringify(tarefas);
+  }
+
+  alterarStatus(id: number): void{
+    const tarefas: Tarefa[] = this.listarTodos();
+    tarefas.forEach((obj, index, objs)=> {
+      if(id === obj.id){
+        objs[index].concluida = !obj.concluida;
+      }
+    });
   }
 }
