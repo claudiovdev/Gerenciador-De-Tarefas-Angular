@@ -57,5 +57,6 @@ export class TarefaService {
         objs[index].concluida = !obj.concluida;
       }
     });
+    localStorage['tarefas'] = JSON.stringify(tarefas);
   }
 }

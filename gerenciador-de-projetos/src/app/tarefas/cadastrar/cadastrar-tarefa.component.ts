@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms'; 
+
 import { TarefaService, Tarefa } from '../shared';
 
 @Component({
@@ -10,23 +11,21 @@ import { TarefaService, Tarefa } from '../shared';
 })
 export class CadastrarTarefaComponent implements OnInit {
 
-  @ViewChild('formTarefa') formTarefa: NgForm;
+  @ViewChild('formTarefa', { static: true }) formTarefa: NgForm;
   tarefa: Tarefa;
 
-  constructor(
-    private tarefaService: TarefaService,
-    private router: Router
-  ) { }
+  constructor(private tarefaService: TarefaService,
+  	private router: Router) { }
 
-  ngOnInit(): void {
-
-    this.tarefa = new Tarefa();
+  ngOnInit() {
+  	this.tarefa = new Tarefa(0, "", false);
   }
 
-    cadastrar(): void{
-      if(this.formTarefa.form.valid){
-        this.tarefaService.cadastrar(this.tarefa);
-        this.router.navigate(["/tarefas"]);
-      }
+  cadastrar(): void {
+    if (this.formTarefa.form.valid) {
+  	  this.tarefaService.cadastrar(this.tarefa);
+  	  this.router.navigate(["/tarefas"]);
     }
+  }
+
 }
